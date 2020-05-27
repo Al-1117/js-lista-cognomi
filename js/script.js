@@ -3,44 +3,63 @@ var listaCognomi = ['Rossi', 'Bianchi', 'Verdi', 'Neri', 'Bologna', 'Roma', 'For
 console.log('Lista cognomi iniziali: '+ listaCognomi);
 
 // Chiedo il cognome all'utente
+
 var cognomeUtente = prompt("Inserisci il tuo cognome");
 console.log('Cognome inserito dall utente: '+cognomeUtente);
 
-// Inserisco il suo cognome all'interno del database
-listaCognomi.push(cognomeUtente);
-console.log('Nuova lista con cognome dell utente: '+listaCognomi);
+while ((cognomeUtente.length == 0) || (!isNaN(parseInt(cognomeUtente) ))){
+  cognomeUtente = prompt("Cognome inserito non valido. Per favore, Inserisci il tuo cognome");
 
-// Stampo la lista ordinata alfabeticamente
-var ordineAlfabetico = listaCognomi.sort();
-
-console.log('Lista cognomi ordinati alfabeticamente: '+ordineAlfabetico);
-
-var messaggio
-
+}
 
 // Controllo se il cognome è già inserito nel database
 
 var verifica = false;
-var i = 0;
 
-while ((verifica) && (i < listaCognomi.length))  {
-  if ( cognomeUtente == listaCognomi[i] ) {
-    verifica = true;
-
-
+for (var i = 0; i < listaCognomi.length; i++) {
+  if ( cognomeUtente == listaCognomi[i] ){
+    verifica = true
   }
-
-  i++;
 }
+// ESITO VERIFICA E COMUNICA ALL'UTENTE SE IL NUMERO DI POSIZIONAMENTO DEL COGNOME
+var messaggio
 
-// Stampo l'esito e comunico il numero di posizionamento all'utente
+if (verifica == false) {
+  // Inserisco il suo cognome all'interno del database
+  listaCognomi.push(cognomeUtente);
+  console.log('Nuova lista con cognome dell utente: '+listaCognomi);
 
-if (verifica) {
-  messaggio = "il tuo cognome è già nel database";
-  console.log(messaggio);
+  // Stampo la lista ordinata alfabeticamente e comunico posizione cognome utente
+  var ordineAlfabetico = listaCognomi.sort();
+  console.log('Lista cognomi ordinati alfabeticamente: '+ordineAlfabetico);
 
-} else {
   var numeroCognomeUtente = parseInt(listaCognomi.indexOf(cognomeUtente))
   messaggio = "La posizione nella lista del tuo cognome è nr. " + (numeroCognomeUtente + 1);
   console.log(messaggio);
+
+// Se già presente, non lo inserisco nel database
+
+} else {
+  messaggio = "il tuo cognome è già nel database";
+  console.log(messaggio);
+
 }
+
+
+
+//
+//
+// var i = 0;
+//
+// while (i < listaCognomi.length) {
+//   if ( cognomeUtente == listaCognomi[i] ) {
+//     verifica = true;
+//
+//
+//   }
+//
+//   i++;
+// }
+//
+//
+//
